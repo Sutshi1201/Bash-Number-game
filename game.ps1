@@ -1,10 +1,13 @@
+function Start-NumberGuessing
+{
+
 Write-Host "++--++--++--++--++--++--++--++" 
 Write-Host "++--++ GUESS THE NUMBER ++--++"
 Write-Host "++--++--++--++--++--++--++--++"
 Start-Sleep -Seconds 1
 $name = Read-Host "Enter Your Name pls 0_< "
 Start-Sleep -Seconds 1
-Write-Host "Hey Welcome $name 0.0!"
+Write-Host "Hey Welcome $name 0.0! "
 Start-Sleep -Seconds 1
 Write-Host "Are you ready to guess THE SECRET NUMBER ?"
 Start-Sleep -Seconds 1
@@ -17,9 +20,11 @@ Start-sleep -Seconds 1
 $secrect_num = Get-Random -Minimum 1 -Maximum 51
 $attempts = 0
 $Max_attepts = 7
-$valid = $false
+
 while($attempts -lt $Max_attepts)
 {
+    $valid = $false
+    $guess = 0
     while(-not $valid)
     {
         $inputguess = Read-Host "Enter Your Guess "
@@ -74,4 +79,52 @@ while($attempts -lt $Max_attepts)
 
         
 }
+}
+$running = "true"
+while ($running = "true")
+{
+  Clear-Host
+Write-Host "++--++--++--++--++--++--++--++--++"
+Write-Host "++--++--++ NUMBER GAME--++--++--++"
+Write-Host "++--++--++--++--++--++--++--++--++"
+Write-Host "'Choose One : "
+Write-Host "1. Guess The Number"
+Write-Host "2. Math Game"
+Write-Host "3. [Exit Game]"
+
+$choice = Read-Host "Yr Choice "
+
+switch ($choice)
+ {
+    "1"
+    {  
+      
+     Start-NumberGuessing
+
+    }
+    "2"
+    {
+      Write-Host "Entring Math Game"
+    }
+    "3"
+    {
+      Write-Host "Exiting game Thanks For Playing"
+      $running = "false"
+    }
+    Default 
+    {
+      Write-Host "Invalid Choice"
+    }
+}
+
+if($running = $true)
+{
+    Read-Host "Press Enter to continue "
+}
+
+}
+
+
+
+
 
