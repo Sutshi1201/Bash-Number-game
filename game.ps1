@@ -1,3 +1,8 @@
+$totalgames = 0
+$totalwins = 0
+$totallosses = 0
+$winstreak = 0
+
 $highscorefile = Join-Path $PSScriptRoot "highscores.txt"
 if(Test-Path $highscorefile)
 {
@@ -15,11 +20,11 @@ else
 function Start-NumberGuessing
 {
 
-Write-Host "++--++--++--++--++--++--++--++--++--++" 
-Write-Host "++--++--++ GUESS THE NUMBER ++--++--++"
-Write-Host "++--++--++--++--++--++--++--++--++--++"
+Write-Host "++--++--++--++--++--++--++--++--++--++" -ForegroundColor DarkBlue
+Write-Host "++--++--++ GUESS THE NUMBER ++--++--++" -ForegroundColor DarkBlue
+Write-Host "++--++--++--++--++--++--++--++--++--++" -ForegroundColor DarkBlue
 Start-Sleep -Seconds 1
-Write-Host "Hey Welcome 0.0 ! "
+Write-Host "Hey Welcome 0.0 ! " 
 Start-Sleep -Seconds 1
 Write-Host "Are you ready to guess THE SECRET NUMBER ?"
 Start-Sleep -Seconds 1
@@ -28,8 +33,8 @@ Start-Sleep -Seconds 1
 $Guess_running = $true
 while ($Guess_running)
 {
-Write-host "--Difficulty--"
-Write-Host "1.[ Easy ]"
+Write-host "--Difficulty--" -ForegroundColor Black
+Write-Host "1.[ Easy ]" 
 Write-Host "2.[ Normal ]"
 Write-Host "3.[ Hard ]"
 Write-Host "4.[ Back to Menu ]"
@@ -97,11 +102,12 @@ while($attempts -lt $Max_attepts)
     }
     
     $attempts++
+    
 
     if ($guess -eq $secrect_num)
     {
         $won = $true
-        Write-Host "'o' you found it"
+        Write-Host "'o' you found it" -ForegroundColor Green
         break
       
          
@@ -119,7 +125,7 @@ while($attempts -lt $Max_attepts)
     $remaining = $Max_attepts - $attempts
     if($remaining -gt 0)
     {
-        Write-Host "You got $remaining more tries left gl"
+        Write-Host "You got $remaining more tries left gl" -ForegroundColor White
          Start-Sleep -Milliseconds 50
     }
    
@@ -149,6 +155,18 @@ while($attempts -lt $Max_attepts)
   
 
   }
+  $totalgames++
+    if($won)
+    {
+      $totalwins++
+      $winstreak++
+    }
+    else 
+    {
+      $totallosses++
+      $winstreak = 0
+    }
+    
   if($won)
   {
   $remaining = $Max_attepts - $attempts + 1
@@ -168,13 +186,13 @@ while($attempts -lt $Max_attepts)
   else 
   {
     $score = 0
-    Write-Host "You Lost Better Luck Next Time"
+    Write-Host "You Lost Better Luck Next Time" -ForegroundColor Red
   }
   if($score -gt [int]$highscores[0])
   {
     $highscores[0] = $score
     Set-Content -Path $highscorefile -Value @($highscores[0],$highscores[1])
-    Write-Host "New Highscore !!"
+    Write-Host "New Highscore !!" -ForegroundColor Yellow
   }
   $endmenue = $true
   while($endmenue)
@@ -182,12 +200,12 @@ while($attempts -lt $Max_attepts)
     
 
   
-  Write-Host "++--++--++--++--++---++"
-  Write-Host "++--++ GAME OVER ++--++"
-  Write-Host "++--++--++--++--++---++"
+  Write-Host "++--++--++--++--++---++" 
+  Write-Host "++--++ GAME OVER ++--++" 
+  Write-Host "++--++--++--++--++---++" 
   Write-Host "Yr Score is [ $score ] !"
-  Write-Host "1.[ Play Again ]"
-  Write-Host "2.[ Back to Menu ]"
+  Write-Host "1.[ Play Again ]" -ForegroundColor Green
+  Write-Host "2.[ Back to Menu ]" 
   $endchoice = Read-Host "Yr Choice "
 
    switch ($endchoice) 
@@ -215,9 +233,9 @@ while($attempts -lt $Max_attepts)
 
 function Start-MathGame 
 {
-  Write-Host "++--++--++--++--++--++--++---++"
-  Write-Host "++--++--++ MATH GAME ++--++--++"
-  Write-Host "++--++--++--++--++--++--++---++"
+  Write-Host "++--++--++--++--++--++--++---++" -ForegroundColor DarkBlue
+  Write-Host "++--++--++ MATH GAME ++--++--++" -ForegroundColor DarkBlue
+  Write-Host "++--++--++--++--++--++--++---++" -ForegroundColor DarkBlue
   Start-Sleep -Seconds 1
   Write-Host "Welcome 0.0 ! "
   Start-Sleep -Seconds 1
@@ -366,7 +384,7 @@ function Start-MathGame
     elseif($number -eq $r_ans)
     {
         $score++
-        Write-Host " Correct !"
+        Write-Host " Correct !" -ForegroundColor Green
        
     }
     else 
@@ -390,7 +408,7 @@ function Start-MathGame
   {
     $highscores[1] = $score
     Set-Content -Path $highscorefile -Value @($highscores[0],$highscores[1])
-    Write-Host "New Highscore !!"
+    Write-Host "New Highscore !!" -ForegroundColor Yellow
   }
  
   $endmenue = $true
@@ -431,14 +449,14 @@ $running = $true
 while ($running)
 {
 Clear-Host
-Write-Host "++--++--++--++--++--++--++--++--++"
-Write-Host "++--++--++ NUMBER GAME--++--++--++"
-Write-Host "++--++--++--++--++--++--++--++--++"
-Write-Host " --Main Menu--"
-Write-Host "1.[ Guess The Number ]"
-Write-Host "2.[ Math Game ]"
-Write-Host "3.[ High Scores ]"
-Write-Host "4.[ Exit Game ]"
+Write-Host "++--++--++--++--++--++--++--++--++" -ForegroundColor Blue
+Write-Host "++--++--++ NUMBER GAME--++--++--++" -ForegroundColor Blue
+Write-Host "++--++--++--++--++--++--++--++--++" -ForegroundColor Blue
+Write-Host " --Main Menu--" -ForegroundColor Black
+Write-Host "1.[ Guess The Number ]" -ForegroundColor Cyan
+Write-Host "2.[ Math Game ]" -ForegroundColor DarkBlue
+Write-Host "3.[ High Scores ]" -ForegroundColor Yellow
+Write-Host "4.[ Exit Game ]" -ForegroundColor Red
 
 $choice = Read-Host "Yr Choice "
 
@@ -463,7 +481,7 @@ switch ($choice)
       Write-Host "Guess The Number : $($highscores[0])"
       Write-Host "Math Game : $($highscores[1])"
       Write-Host ""
-      Write-Host "1.[ Rest Score ]"
+      Write-Host "1.[ Rest Score ]" -ForegroundColor Red
       Write-Host "2.[ Back to Menu ]"
       $Scoreans = Read-Host "Yr Choice "
       switch($Scoreans)
@@ -473,7 +491,7 @@ switch ($choice)
           $ans = Read-Host "Are you Sure [Y/N] "
           if($ans -eq "Y")
           {
-            $highscores = $(0,0)
+            $highscores = @(0,0)
             Set-Content -Path $highscorefile -Value @($highscores[0],$highscores[1])
             Write-Host "Scores Resetted Successfully"
             Start-Sleep -Seconds 1
