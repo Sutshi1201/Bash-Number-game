@@ -462,7 +462,32 @@ switch ($choice)
       Write-Host "++--++--++--++--++--++-++"
       Write-Host "Guess The Number : $($highscores[0])"
       Write-Host "Math Game : $($highscores[1])"
-      Read-Host "Press Enter to Go back to The Menu"
+      Write-Host ""
+      Write-Host "1.[ Rest Score ]"
+      Write-Host "2.[ Back to Menu ]"
+      $Scoreans = Read-Host "Yr Choice "
+      switch($Scoreans)
+      {
+        "1"
+        {
+          $ans = Read-Host "Are you Sure [Y/N] "
+          if($ans -eq "Y")
+          {
+            $highscores = $(0,0)
+            Set-Content -Path $highscorefile -Value @($highscores[0],$highscores[1])
+            Write-Host "Scores Resetted Successfully"
+            Start-Sleep -Seconds 1
+          }
+          elseif($ans -eq "N")
+          {
+            Write-Host "Rest Cancelled"
+          }
+        }
+        "2"
+        {
+          break
+        }
+      }
     }
     "4"
     {
