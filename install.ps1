@@ -1,4 +1,4 @@
-$repo = "https://raw.githubusercontent.com/Sutshi1201/Bash-Number-game/refs/heads/main/game.ps1"
+$repo = "https://raw.githubusercontent.com/Sutshi1201/Bash-Number-game/main"
 try 
 {
 Invoke-WebRequest "$repo/game.ps1" -OutFile "game.ps1" -ErrorAction Stop
